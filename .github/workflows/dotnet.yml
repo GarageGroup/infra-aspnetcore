@@ -30,13 +30,13 @@ jobs:
     # AspNetCore.Endpoint
 
     - name: Restore AspNetCore.Endpoint
-      run: dotnet restore ./src/*/*/AspNetCore.Endpoint.csproj
+      run: dotnet restore ./src/*/AspNetCore.Endpoint.csproj
 
     - name: Build AspNetCore.Endpoint
-      run: dotnet build ./src/*/*/AspNetCore.Endpoint.csproj --no-restore  -c Release
+      run: dotnet build ./src/*/AspNetCore.Endpoint.csproj --no-restore  -c Release
 
     - name: Pack AspNetCore.Endpoint
-      run: dotnet pack ./src/*/*/AspNetCore.Endpoint.csproj --no-restore -o ~/nuget  -c Release
+      run: dotnet pack ./src/*/AspNetCore.Endpoint.csproj --no-restore -o ~/nuget  -c Release
 
     # Push
 
