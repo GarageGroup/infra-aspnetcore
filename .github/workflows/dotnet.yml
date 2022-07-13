@@ -27,6 +27,17 @@ jobs:
     - name: Add GGroupp NuGet Source
       run: dotnet nuget add source ${{ secrets.GGROUPP_NUGET_SOURCE_URL }} -n ggroupp -u ${{ secrets.GGROUPP_NUGET_SOURCE_USER_NAME }} -p ${{ secrets.GGROUPP_NUGET_SOURCE_USER_PASSWORD }} --store-password-in-clear-text
 
+    # AspNetCore.Endpoint.InOut
+
+    - name: Restore AspNetCore.Endpoint.InOut
+      run: dotnet restore ./src/*/AspNetCore.Endpoint.InOut.csproj
+
+    - name: Build AspNetCore.Endpoint.InOut
+      run: dotnet build ./src/*/AspNetCore.Endpoint.InOut.csproj --no-restore  -c Release
+
+    - name: Pack AspNetCore.Endpoint.InOut
+      run: dotnet pack ./src/*/AspNetCore.Endpoint.InOut.csproj --no-restore -o ~/nuget  -c Release
+
     # AspNetCore.Endpoint
 
     - name: Restore AspNetCore.Endpoint
@@ -37,6 +48,39 @@ jobs:
 
     - name: Pack AspNetCore.Endpoint
       run: dotnet pack ./src/*/AspNetCore.Endpoint.csproj --no-restore -o ~/nuget  -c Release
+
+    # AspNetCore.Mvc.Core
+
+    - name: Restore AspNetCore.Mvc.Core
+      run: dotnet restore ./src/*/AspNetCore.Mvc.Core.csproj
+
+    - name: Build AspNetCore.Mvc.Core
+      run: dotnet build ./src/*/AspNetCore.Mvc.Core.csproj --no-restore  -c Release
+
+    - name: Pack AspNetCore.Mvc.Core
+      run: dotnet pack ./src/*/AspNetCore.Mvc.Core.csproj --no-restore -o ~/nuget  -c Release
+
+    # AspNetCore.Mvc.Hosting
+
+    - name: Restore AspNetCore.Mvc.Hosting
+      run: dotnet restore ./src/*/AspNetCore.Mvc.Hosting.csproj
+
+    - name: Build AspNetCore.Mvc.Hosting
+      run: dotnet build ./src/*/AspNetCore.Mvc.Hosting.csproj --no-restore  -c Release
+
+    - name: Pack AspNetCore.Mvc.Hosting
+      run: dotnet pack ./src/*/AspNetCore.Mvc.Hosting.csproj --no-restore -o ~/nuget  -c Release
+
+    # AspNetCore.ApplicationInsights
+
+    - name: Restore AspNetCore.ApplicationInsights
+      run: dotnet restore ./src/*/AspNetCore.ApplicationInsights.csproj
+
+    - name: Build AspNetCore.ApplicationInsights
+      run: dotnet build ./src/*/AspNetCore.ApplicationInsights.csproj --no-restore  -c Release
+
+    - name: Pack AspNetCore.ApplicationInsights
+      run: dotnet pack ./src/*/AspNetCore.ApplicationInsights.csproj --no-restore -o ~/nuget  -c Release
 
     # Push
 
