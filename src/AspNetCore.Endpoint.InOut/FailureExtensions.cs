@@ -2,7 +2,7 @@ using System;
 
 namespace GGroupp.Infra;
 
-partial class FailureExtensions
+public static partial class FailureExtensions
 {
     public static EndpointFailure ToEndpointFailure<TFailureCode>(
         this Failure<TFailureCode> failure,
