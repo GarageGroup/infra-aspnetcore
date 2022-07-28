@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace>Microsoft.AspNetCore.Builder</RootNamespace>
+    <AssemblyName>GGroupp.Infra.AspNetCore.AzureApplication</AssemblyName>
+    <Version>1.0.0-build.7</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GGroupp.Infra.AspNetCore.ApplicationInsights" Version="1.0.0" />
+    <PackageReference Include="GGroupp.Infra.Http.SocketsHandlerProvider" Version="2.3.0" />
+  </ItemGroup>
+
+</Project>

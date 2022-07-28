@@ -82,6 +82,17 @@ jobs:
     - name: Pack AspNetCore.ApplicationInsights
       run: dotnet pack ./src/*/AspNetCore.ApplicationInsights.csproj --no-restore -o ~/nuget  -c Release
 
+    # AspNetCore.AzureApplication
+
+    - name: Restore AspNetCore.AzureApplication
+      run: dotnet restore ./src/*/AspNetCore.AzureApplication.csproj
+
+    - name: Build AspNetCore.AzureApplication
+      run: dotnet build ./src/*/AspNetCore.AzureApplication.csproj --no-restore  -c Release
+
+    - name: Pack AspNetCore.AzureApplication
+      run: dotnet pack ./src/*/AspNetCore.AzureApplication.csproj --no-restore -o ~/nuget  -c Release
+
     # Push
 
     - name: Push Packages
