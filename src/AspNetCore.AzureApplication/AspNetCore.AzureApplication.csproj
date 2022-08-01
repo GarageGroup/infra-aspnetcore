@@ -9,12 +9,12 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>Microsoft.AspNetCore.Builder</RootNamespace>
     <AssemblyName>GGroupp.Infra.AspNetCore.AzureApplication</AssemblyName>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="GGroupp.Infra.AspNetCore.ApplicationInsights" Version="1.0.0" />
-    <PackageReference Include="GGroupp.Infra.AspNetCore.EndpointApplication" Version="1.0.0" />
+    <PackageReference Include="GGroupp.Infra.AspNetCore.EndpointApplication" Version="1.0.1" />
   </ItemGroup>
 
 </Project>

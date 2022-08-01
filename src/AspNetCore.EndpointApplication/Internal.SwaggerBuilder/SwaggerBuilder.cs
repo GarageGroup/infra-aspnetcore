@@ -1,20 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.OpenApi.Models;
 
 namespace GGroupp.Infra;
 
 internal sealed class SwaggerBuilder : ISwaggerBuilder
 {
-    private readonly Stack<Action<OpenApiDocument>> configurators;
+    private readonly ICollection<Action<OpenApiDocument>> configurators;
 
     internal SwaggerBuilder()
         =>
-        configurators = new();
+        configurators = new List<Action<OpenApiDocument>>();
 
     public ISwaggerBuilder Use(Action<OpenApiDocument> configurator!!)
     {
-        configurators.Push(configurator);
+        configurators.Add(configurator);
         return this;
     }
 
@@ -22,7 +23,7 @@ internal sealed class SwaggerBuilder : ISwaggerBuilder
     {
         var document = new OpenApiDocument();
 
-        while (configurators.TryPop(out var configurator))
+        foreach (var configurator in configurators.Reverse())
         {
             configurator.Invoke(document);
         }
