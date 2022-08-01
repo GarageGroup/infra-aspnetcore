@@ -7,28 +7,26 @@ namespace Microsoft.AspNetCore.Builder;
 
 public static class AzureApplication
 {
-    public static WebApplication Create(string[] args)
+    public static EndpointApplication Create(string[] args)
         =>
         InnerCreate(args, null);
 
-    public static WebApplication Create(string[] args, Action<WebApplicationBuilder> configure)
+    public static EndpointApplication Create(string[] args, Action<WebApplicationBuilder> configure)
         =>
         InnerCreate(args, configure ?? throw new ArgumentNullException(nameof(configure)));
 
-    private static WebApplication InnerCreate(string[] args, Action<WebApplicationBuilder>? configure)
+    private static EndpointApplication InnerCreate(string[] args, Action<WebApplicationBuilder>? configure)
     {
         var appBuilder = WebApplication.CreateBuilder(args);
 
-        appBuilder.Host.ConfigureSocketsHttpHandlerProvider().ConfigureApplicationInsights();
+        appBuilder.Host.ConfigureApplicationInsights();
         if (configure is not null)
         {
             configure.Invoke(appBuilder);
         }
 
-        var app = appBuilder.Build();
-
+        var app = appBuilder.BuildEndpointApplication();
         app.Map("/health", static app => app.Use(static _ => InvokeHealthCheckAsync));
-        app.UseRouting();
 
         return app;
     }

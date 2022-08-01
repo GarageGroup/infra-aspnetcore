@@ -82,6 +82,17 @@ jobs:
     - name: Pack AspNetCore.ApplicationInsights
       run: dotnet pack ./src/*/AspNetCore.ApplicationInsights.csproj --no-restore -o ~/nuget  -c Release
 
+    # AspNetCore.EndpointApplication
+
+    - name: Restore AspNetCore.EndpointApplication
+      run: dotnet restore ./src/*/AspNetCore.EndpointApplication.csproj
+
+    - name: Build AspNetCore.EndpointApplication
+      run: dotnet build ./src/*/AspNetCore.EndpointApplication.csproj --no-restore  -c Release
+
+    - name: Pack AspNetCore.EndpointApplication
+      run: dotnet pack ./src/*/AspNetCore.EndpointApplication.csproj --no-restore -o ~/nuget  -c Release
+
     # AspNetCore.AzureApplication
 
     - name: Restore AspNetCore.AzureApplication
