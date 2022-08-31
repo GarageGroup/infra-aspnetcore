@@ -2,14 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <EnablePreviewFeatures>true</EnablePreviewFeatures>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>Microsoft.AspNetCore.Builder</RootNamespace>
     <AssemblyName>GGroupp.Infra.AspNetCore.EndpointApplication</AssemblyName>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GGroupp.Infra.Http.SocketsHandlerProvider" Version="2.3.0" />
+    <PackageReference Include="GGroupp.Infra.Http.SocketsHandlerProvider" Version="2.3.1" />
     <PackageReference Include="GGroupp.Infra.Swagger.Builder.Abstractions" Version="1.0.0" />
   </ItemGroup>
 

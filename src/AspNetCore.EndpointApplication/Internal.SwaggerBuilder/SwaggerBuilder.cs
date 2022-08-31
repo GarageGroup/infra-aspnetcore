@@ -13,8 +13,10 @@ internal sealed class SwaggerBuilder : ISwaggerBuilder
         =>
         configurators = new List<Action<OpenApiDocument>>();
 
-    public ISwaggerBuilder Use(Action<OpenApiDocument> configurator!!)
+    public ISwaggerBuilder Use(Action<OpenApiDocument> configurator)
     {
+        _ = configurator ?? throw new ArgumentNullException(nameof(configurator));
+
         configurators.Add(configurator);
         return this;
     }
