@@ -2,19 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <EnablePreviewFeatures>true</EnablePreviewFeatures>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>Microsoft.AspNetCore.Builder</RootNamespace>
     <AssemblyName>GGroupp.Infra.AspNetCore.AzureApplication</AssemblyName>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="GGroupp.Infra.AspNetCore.ApplicationInsights" Version="1.0.0" />
-    <PackageReference Include="GGroupp.Infra.AspNetCore.EndpointApplication" Version="1.0.1" />
+    <PackageReference Include="GGroupp.Infra.AspNetCore.EndpointApplication" Version="1.0.2" />
   </ItemGroup>
 
 </Project>
