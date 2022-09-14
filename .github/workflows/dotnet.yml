@@ -104,6 +104,17 @@ jobs:
     - name: Pack AspNetCore.AzureApplication
       run: dotnet pack ./src/*/AspNetCore.AzureApplication.csproj --no-restore -o ~/nuget  -c Release
 
+    # AspNetCore.Cors
+
+    - name: Restore AspNetCore.Cors
+      run: dotnet restore ./src/*/AspNetCore.Cors.csproj
+
+    - name: Build AspNetCore.Cors
+      run: dotnet build ./src/*/AspNetCore.Cors.csproj --no-restore  -c Release
+
+    - name: Pack AspNetCore.Cors
+      run: dotnet pack ./src/*/AspNetCore.Cors.csproj --no-restore -o ~/nuget  -c Release
+
     # Push
 
     - name: Push Packages
