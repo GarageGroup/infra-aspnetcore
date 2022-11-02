@@ -15,17 +15,25 @@ public static class ApplicationInsightsBuilderExtensions
 
     private static void ConfigureApplicationInsights(HostBuilderContext context, ILoggingBuilder builder)
     {
-        var instrumentationKey = context.Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"];
-
-        if (string.IsNullOrEmpty(instrumentationKey))
+        if (context.HasApplicationInsightsConnectionString() is false)
         {
             return;
         }
 
-        builder.AddApplicationInsights(instrumentationKey);
+        builder.AddApplicationInsights();
     }
 
-    private static void ConfigureTelemetryServices(HostBuilderContext _, IServiceCollection services)
-        =>
+    private static void ConfigureTelemetryServices(HostBuilderContext context, IServiceCollection services)
+    {
+        if (context.HasApplicationInsightsConnectionString() is false)
+        {
+            return;
+        }
+
         services.AddApplicationInsightsTelemetry();
+    }
+
+    private static bool HasApplicationInsightsConnectionString(this HostBuilderContext context)
+        =>
+        string.IsNullOrEmpty(context.Configuration["ApplicationInsights:ConnectionString"]) is false;
 }
