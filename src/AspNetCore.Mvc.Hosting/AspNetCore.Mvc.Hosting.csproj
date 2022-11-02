@@ -1,18 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>Microsoft.Extensions.Hosting</RootNamespace>
     <AssemblyName>GGroupp.Infra.AspNetCore.Mvc.Hosting</AssemblyName>
-    <Version>1.0.0</Version>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GGroupp.Infra.AspNetCore.Mvc.Core" Version="1.0.0" />
+    <PackageReference Include="GGroupp.Infra.AspNetCore.Mvc.Core" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="2.2.0" />
   </ItemGroup>
 

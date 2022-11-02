@@ -13,8 +13,8 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
-        include-prerelease: false
+        dotnet-version: 7.0.x
+        include-prerelease: true
 
      # Add NuGet Sources
 
@@ -25,29 +25,7 @@ jobs:
       run: dotnet nuget add source ~/nuget
 
     - name: Add GGroupp NuGet Source
-      run: dotnet nuget add source ${{ secrets.GGROUPP_NUGET_SOURCE_URL }} -n ggroupp -u ${{ secrets.GGROUPP_NUGET_SOURCE_USER_NAME }} -p ${{ secrets.GGROUPP_NUGET_SOURCE_USER_PASSWORD }} --store-password-in-clear-text
-
-    # AspNetCore.Endpoint.InOut
-
-    - name: Restore AspNetCore.Endpoint.InOut
-      run: dotnet restore ./src/*/AspNetCore.Endpoint.InOut.csproj
-
-    - name: Build AspNetCore.Endpoint.InOut
-      run: dotnet build ./src/*/AspNetCore.Endpoint.InOut.csproj --no-restore  -c Release
-
-    - name: Pack AspNetCore.Endpoint.InOut
-      run: dotnet pack ./src/*/AspNetCore.Endpoint.InOut.csproj --no-restore -o ~/nuget  -c Release
-
-    # AspNetCore.Endpoint
-
-    - name: Restore AspNetCore.Endpoint
-      run: dotnet restore ./src/*/AspNetCore.Endpoint.csproj
-
-    - name: Build AspNetCore.Endpoint
-      run: dotnet build ./src/*/AspNetCore.Endpoint.csproj --no-restore  -c Release
-
-    - name: Pack AspNetCore.Endpoint
-      run: dotnet pack ./src/*/AspNetCore.Endpoint.csproj --no-restore -o ~/nuget  -c Release
+      run: dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }} -n ggroupp -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }} -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }} --store-password-in-clear-text
 
     # AspNetCore.Mvc.Core
 
@@ -119,4 +97,4 @@ jobs:
 
     - name: Push Packages
       if: ${{ github.ref == 'refs/heads/main' }}
-      run: dotnet nuget push "../../../nuget/*.nupkg" -s ${{ secrets.GGROUPP_NUGET_SOURCE_URL }} -k ${{ secrets.GGROUPP_NUGET_SOURCE_USER_PASSWORD }} --skip-duplicate
+      run: dotnet nuget push "../../../nuget/*.nupkg" -s ${{ secrets.GG_NUGET_SOURCE_URL }} -k ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }} --skip-duplicate
