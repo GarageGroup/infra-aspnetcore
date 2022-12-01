@@ -9,16 +9,15 @@ public static class MvcHostingExtensions
 {
     public static IHostBuilder ConfigureEndpointControllers(this IHostBuilder hostBuilder)
     {
-        _ = hostBuilder ?? throw new ArgumentNullException(nameof(hostBuilder));
-
+        ArgumentNullException.ThrowIfNull(hostBuilder);
         return hostBuilder.ConfigureServices(ConfigureServices);
     }
 
     public static IHostBuilder ConfigureController<T>(this IHostBuilder hostBuilder, Func<IServiceProvider, T> controllerResolver)
         where T : class
     {
-        _ = hostBuilder ?? throw new ArgumentNullException(nameof(hostBuilder));
-        _ = controllerResolver ?? throw new ArgumentNullException(nameof(controllerResolver));
+        ArgumentNullException.ThrowIfNull(hostBuilder);
+        ArgumentNullException.ThrowIfNull(controllerResolver);
 
         return hostBuilder.ConfigureServices(InnerConfigureServices);
 
