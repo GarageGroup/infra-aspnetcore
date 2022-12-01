@@ -8,8 +8,7 @@ public static class ApplicationInsightsBuilderExtensions
 {
     public static IHostBuilder ConfigureApplicationInsights(this IHostBuilder hostBuilder)
     {
-        _ = hostBuilder ?? throw new ArgumentNullException(nameof(hostBuilder));
-
+        ArgumentNullException.ThrowIfNull(hostBuilder);
         return hostBuilder.ConfigureServices(ConfigureTelemetryServices).ConfigureLogging(ConfigureApplicationInsights);
     }
 

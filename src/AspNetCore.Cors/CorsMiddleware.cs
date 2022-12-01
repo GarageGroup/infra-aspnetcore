@@ -14,7 +14,7 @@ public static class CorsMiddleware
     public static TApplicationBuilder AllowCors<TApplicationBuilder>(this TApplicationBuilder app, string sectionName = DefaultCorsSectionName)
         where TApplicationBuilder : IApplicationBuilder
     {
-        _ = app ?? throw new ArgumentNullException(nameof(app));
+        ArgumentNullException.ThrowIfNull(app);
 
         var section = app.ApplicationServices.GetService<IConfiguration>()?.GetSection(sectionName ?? DefaultCorsSectionName);
         var option = section.GetCorsOption();
@@ -31,10 +31,9 @@ public static class CorsMiddleware
         this TApplicationBuilder app, Func<IServiceProvider, CorsOption> optionResolver)
         where TApplicationBuilder : IApplicationBuilder
     {
-        _ = app ?? throw new ArgumentNullException(nameof(app));
+        ArgumentNullException.ThrowIfNull(app);
 
         _ = app.Use(InnerInvokeAsync);
-
         return app;
 
         Task InnerInvokeAsync(HttpContext context, Func<Task> next)
@@ -44,8 +43,8 @@ public static class CorsMiddleware
 
     private static Task NextAsync(this HttpContext context, Func<Task> next, CorsOption option)
     {
-        _ = context ?? throw new ArgumentNullException(nameof(context));
-        _ = next ?? throw new ArgumentNullException(nameof(next));
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(next);
 
         context.Response.SetHeaderValue("Access-Control-Allow-Origin", option.AllowOrigin);
         context.Response.SetHeaderValue("Access-Control-Allow-Credentials", option.AllowCredentials ? "true" : "false");
