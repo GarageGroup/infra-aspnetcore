@@ -51,6 +51,7 @@ public static class CorsMiddleware
         context.Response.SetHeaderValue("Access-Control-Allow-Headers", option.AllowHeaders);
         context.Response.SetHeaderValue("Access-Control-Allow-Methods", option.AllowMethods);
         context.Response.SetHeaderValue("Access-Control-Max-Age", option.MaxAgeInMilliseconds?.ToString());
+        context.Response.SetHeaderValue("Access-Control-Expose-Headers", option.ExposeHeaders);
 
         if (string.Equals(context.Request.Method, "OPTIONS", StringComparison.InvariantCultureIgnoreCase))
         {
@@ -78,5 +79,6 @@ public static class CorsMiddleware
             allowCredentials: section?.GetValue<bool?>("AllowCredentials") ?? true,
             allowHeaders: section?.GetValue<string>("AllowHeaders"),
             allowMethods: section?.GetValue<string>("AllowMethods"),
-            maxAgeInMilliseconds: section?.GetValue<int?>("MaxAgeInMilliseconds"));
+            maxAgeInMilliseconds: section?.GetValue<int?>("MaxAgeInMilliseconds"),
+            exposeHeaders: section?.GetValue<string>("ExposeHeaders"));
 }
