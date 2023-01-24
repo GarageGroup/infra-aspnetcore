@@ -13,13 +13,15 @@ public sealed record class CorsOption
         bool allowCredentials = true,
         [AllowNull] string allowHeaders = AllValues,
         [AllowNull] string allowMethods = DeaultMethods,
-        int? maxAgeInMilliseconds = null)
+        int? maxAgeInMilliseconds = null,
+        [AllowNull] string exposeHeaders = AllValues)
     {
         AllowOrigin = string.IsNullOrEmpty(allowOrigin) ? AllValues : allowOrigin;
         AllowCredentials = allowCredentials;
         AllowHeaders = string.IsNullOrEmpty(allowHeaders) ? AllValues : allowHeaders;
         AllowMethods = string.IsNullOrEmpty(allowMethods) ? DeaultMethods : allowMethods;
         MaxAgeInMilliseconds = maxAgeInMilliseconds;
+        ExposeHeaders = string.IsNullOrEmpty(exposeHeaders) ? AllValues : exposeHeaders;
     }
 
     public string AllowOrigin { get; }
@@ -31,4 +33,6 @@ public sealed record class CorsOption
     public string AllowMethods { get; }
 
     public int? MaxAgeInMilliseconds { get; }
+
+    public string ExposeHeaders { get; }
 }
