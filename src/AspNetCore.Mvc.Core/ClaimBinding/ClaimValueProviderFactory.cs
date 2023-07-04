@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 public sealed class ClaimValueProviderFactory : IValueProviderFactory
 {

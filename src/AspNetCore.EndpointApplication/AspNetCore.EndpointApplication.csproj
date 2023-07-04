@@ -7,8 +7,8 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>Microsoft.AspNetCore.Builder</RootNamespace>
-    <AssemblyName>GGroupp.Infra.AspNetCore.EndpointApplication</AssemblyName>
-    <Version>2.2.0</Version>
+    <AssemblyName>GarageGroup.Infra.AspNetCore.EndpointApplication</AssemblyName>
+    <Version>2.2.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GGroupp.Infra.Http.SocketsHandlerProvider" Version="2.4.0" />
-    <PackageReference Include="GGroupp.Infra.Swagger.Builder.Abstractions" Version="2.1.1" />
+    <PackageReference Include="GarageGroup.Infra.Http.SocketsHandlerProvider" Version="2.4.1" />
+    <PackageReference Include="GarageGroup.Infra.Swagger.Builder.Abstractions" Version="2.2.1" />
   </ItemGroup>
 
 </Project>

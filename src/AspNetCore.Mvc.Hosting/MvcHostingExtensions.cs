@@ -1,5 +1,5 @@
 using System;
-using GGroupp.Infra;
+using GarageGroup.Infra;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
