@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 public static class ControllerResult
 {

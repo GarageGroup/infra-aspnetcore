@@ -7,13 +7,13 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>Microsoft.AspNetCore.Builder</RootNamespace>
-    <AssemblyName>GGroupp.Infra.AspNetCore.AzureApplication</AssemblyName>
-    <Version>2.3.0</Version>
+    <AssemblyName>GarageGroup.Infra.AspNetCore.AzureApplication</AssemblyName>
+    <Version>2.3.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GGroupp.Infra.AspNetCore.ApplicationInsights" Version="2.2.0" />
-    <PackageReference Include="GGroupp.Infra.AspNetCore.EndpointApplication" Version="2.2.0" />
+    <PackageReference Include="GarageGroup.Infra.AspNetCore.ApplicationInsights" Version="2.2.1" />
+    <PackageReference Include="GarageGroup.Infra.AspNetCore.EndpointApplication" Version="2.2.1" />
   </ItemGroup>
 
 </Project>

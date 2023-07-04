@@ -7,12 +7,12 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>Microsoft.Extensions.Hosting</RootNamespace>
-    <AssemblyName>GGroupp.Infra.AspNetCore.Mvc.Hosting</AssemblyName>
+    <AssemblyName>GarageGroup.Infra.AspNetCore.Mvc.Hosting</AssemblyName>
     <Version>2.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GGroupp.Infra.AspNetCore.Mvc.Core" Version="2.1.0" />
+    <PackageReference Include="GarageGroup.Infra.AspNetCore.Mvc.Core" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="2.2.0" />
   </ItemGroup>
 

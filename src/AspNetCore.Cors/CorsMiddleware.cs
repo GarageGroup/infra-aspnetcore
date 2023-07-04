@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using GGroupp.Infra;
+using GarageGroup.Infra;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

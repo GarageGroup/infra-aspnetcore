@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 [AttributeUsage(AttributeTargets.Parameter)]
 public sealed class FromClaimAttribute : Attribute, IBindingSourceMetadata, IModelNameProvider

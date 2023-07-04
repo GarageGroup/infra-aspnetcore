@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.OpenApi.Models;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 internal sealed class SwaggerBuilder : ISwaggerBuilder
 {
