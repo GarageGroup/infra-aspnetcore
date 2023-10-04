@@ -20,10 +20,7 @@ public static class AzureApplication
         var appBuilder = WebApplication.CreateBuilder(args);
 
         appBuilder.Host.ConfigureApplicationInsights();
-        if (configure is not null)
-        {
-            configure.Invoke(appBuilder);
-        }
+        configure?.Invoke(appBuilder);
 
         var app = appBuilder.BuildEndpointApplication();
         app.Map("/health", static app => app.Use(static _ => InvokeHealthCheckAsync));

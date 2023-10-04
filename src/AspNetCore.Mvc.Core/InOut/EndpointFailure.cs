@@ -21,7 +21,11 @@ public readonly record struct EndpointFailure
 
     public FailureStatusCode Status { get; }
 
-    public string FailureMessage => failureMessage ?? string.Empty;
+    public string FailureMessage
+        =>
+        failureMessage ?? string.Empty;
 
-    public string UserDetail => userDetail ?? string.Empty;
+    public string UserDetail
+        =>
+        userDetail ?? string.Empty;
 }
