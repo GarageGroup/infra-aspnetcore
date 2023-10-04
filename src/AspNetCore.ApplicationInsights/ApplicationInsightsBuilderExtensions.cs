@@ -34,5 +34,6 @@ public static class ApplicationInsightsBuilderExtensions
 
     private static bool HasApplicationInsightsConnectionString(this HostBuilderContext context)
         =>
-        string.IsNullOrEmpty(context.Configuration["ApplicationInsights:ConnectionString"]) is false;
+        string.IsNullOrEmpty(context.Configuration["ApplicationInsights:ConnectionString"]) is false ||
+        string.IsNullOrEmpty(context.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]) is false;
 }
