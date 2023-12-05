@@ -8,7 +8,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>Microsoft.AspNetCore.Builder</RootNamespace>
     <AssemblyName>GarageGroup.Infra.AspNetCore.EndpointApplication</AssemblyName>
-    <Version>3.0.1</Version>
+    <Version>3.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,8 +17,8 @@
 
   <ItemGroup>
     <PackageReference Include="GarageGroup.Infra.Azure.TokenCredential" Version="0.1.0" />
-    <PackageReference Include="GarageGroup.Infra.Http.SocketsHandlerProvider" Version="2.4.2" />
-    <PackageReference Include="GarageGroup.Infra.Swagger.Builder.Abstractions" Version="2.2.3" />
+    <PackageReference Include="GarageGroup.Infra.Http.SocketsHandlerProvider" Version="2.5.1" />
+    <PackageReference Include="GarageGroup.Infra.Swagger.Builder.Abstractions" Version="2.2.4" />
   </ItemGroup>
 
 </Project>
