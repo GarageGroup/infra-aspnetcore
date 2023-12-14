@@ -8,7 +8,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>Microsoft.AspNetCore.Builder</RootNamespace>
     <AssemblyName>GarageGroup.Infra.AspNetCore.AzureApplication</AssemblyName>
-    <Version>3.1.0</Version>
+    <Version>3.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

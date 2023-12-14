@@ -1,6 +1,4 @@
 using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Builder;
@@ -22,15 +20,6 @@ public static class AzureApplication
         appBuilder.Host.ConfigureApplicationInsights();
         configure?.Invoke(appBuilder);
 
-        var app = appBuilder.BuildEndpointApplication();
-        app.Map("/health", static app => app.Use(static _ => InvokeHealthCheckAsync));
-
-        return app;
-    }
-
-    private static Task InvokeHealthCheckAsync(HttpContext httpContext)
-    {
-        httpContext.Response.StatusCode = 200;
-        return httpContext.Response.WriteAsync("Healthy", httpContext.RequestAborted);
+        return appBuilder.BuildEndpointApplication();
     }
 }
