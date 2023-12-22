@@ -3,17 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.ApplicationInsights", "AspNetCore.ApplicationInsights\AspNetCore.ApplicationInsights.csproj", "{7250EF8E-D159-441E-899F-4B51071C49CA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.AzureApplication", "AspNetCore.AzureApplication\AspNetCore.AzureApplication.csproj", "{C8D312E8-9965-4F6D-87B0-9E4E1F64F341}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Cors", "AspNetCore.Cors\AspNetCore.Cors.csproj", "{538BFAD7-3BE4-4DE6-A89C-B4155F42866E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.EndpointApplication", "AspNetCore.EndpointApplication\AspNetCore.EndpointApplication.csproj", "{5FC51A44-EFDE-414E-992A-8CC10398F3B4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Mvc.Core", "AspNetCore.Mvc.Core\AspNetCore.Mvc.Core.csproj", "{76C0DDF9-6548-4C9B-8180-40B7DD2C6F87}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Mvc.Hosting", "AspNetCore.Mvc.Hosting\AspNetCore.Mvc.Hosting.csproj", "{1F1FF4D9-759F-418B-9448-516462221729}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,10 +18,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7250EF8E-D159-441E-899F-4B51071C49CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7250EF8E-D159-441E-899F-4B51071C49CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7250EF8E-D159-441E-899F-4B51071C49CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7250EF8E-D159-441E-899F-4B51071C49CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C8D312E8-9965-4F6D-87B0-9E4E1F64F341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C8D312E8-9965-4F6D-87B0-9E4E1F64F341}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8D312E8-9965-4F6D-87B0-9E4E1F64F341}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -40,13 +30,5 @@ Global
 		{5FC51A44-EFDE-414E-992A-8CC10398F3B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FC51A44-EFDE-414E-992A-8CC10398F3B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FC51A44-EFDE-414E-992A-8CC10398F3B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76C0DDF9-6548-4C9B-8180-40B7DD2C6F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76C0DDF9-6548-4C9B-8180-40B7DD2C6F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76C0DDF9-6548-4C9B-8180-40B7DD2C6F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76C0DDF9-6548-4C9B-8180-40B7DD2C6F87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F1FF4D9-759F-418B-9448-516462221729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F1FF4D9-759F-418B-9448-516462221729}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F1FF4D9-759F-418B-9448-516462221729}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F1FF4D9-759F-418B-9448-516462221729}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

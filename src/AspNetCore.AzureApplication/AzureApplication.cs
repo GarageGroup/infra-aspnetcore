@@ -17,7 +17,7 @@ public static class AzureApplication
     {
         var appBuilder = WebApplication.CreateBuilder(args);
 
-        appBuilder.Host.ConfigureApplicationInsights();
+        appBuilder.Host.InternalConfigureApplicationInsights().InternalConfigureAzureAppConfiguration();
         configure?.Invoke(appBuilder);
 
         return appBuilder.BuildEndpointApplication();

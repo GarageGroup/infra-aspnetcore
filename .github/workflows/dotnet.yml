@@ -33,39 +33,6 @@ jobs:
         -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
         --store-password-in-clear-text
 
-    # AspNetCore.Mvc.Core
-
-    - name: Restore AspNetCore.Mvc.Core
-      run: dotnet restore ./src/*/AspNetCore.Mvc.Core.csproj
-
-    - name: Build AspNetCore.Mvc.Core
-      run: dotnet build ./src/*/AspNetCore.Mvc.Core.csproj --no-restore  -c Release
-
-    - name: Pack AspNetCore.Mvc.Core
-      run: dotnet pack ./src/*/AspNetCore.Mvc.Core.csproj --no-restore -o ~/nuget  -c Release
-
-    # AspNetCore.Mvc.Hosting
-
-    - name: Restore AspNetCore.Mvc.Hosting
-      run: dotnet restore ./src/*/AspNetCore.Mvc.Hosting.csproj
-
-    - name: Build AspNetCore.Mvc.Hosting
-      run: dotnet build ./src/*/AspNetCore.Mvc.Hosting.csproj --no-restore  -c Release
-
-    - name: Pack AspNetCore.Mvc.Hosting
-      run: dotnet pack ./src/*/AspNetCore.Mvc.Hosting.csproj --no-restore -o ~/nuget  -c Release
-
-    # AspNetCore.ApplicationInsights
-
-    - name: Restore AspNetCore.ApplicationInsights
-      run: dotnet restore ./src/*/AspNetCore.ApplicationInsights.csproj
-
-    - name: Build AspNetCore.ApplicationInsights
-      run: dotnet build ./src/*/AspNetCore.ApplicationInsights.csproj --no-restore  -c Release
-
-    - name: Pack AspNetCore.ApplicationInsights
-      run: dotnet pack ./src/*/AspNetCore.ApplicationInsights.csproj --no-restore -o ~/nuget  -c Release
-
     # AspNetCore.EndpointApplication
 
     - name: Restore AspNetCore.EndpointApplication
