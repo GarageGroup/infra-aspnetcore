@@ -4,13 +4,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.Hosting;
 
-public static class ApplicationInsightsBuilderExtensions
+partial class AzureHostBuilderExtensions
 {
     public static IHostBuilder ConfigureApplicationInsights(this IHostBuilder hostBuilder)
     {
         ArgumentNullException.ThrowIfNull(hostBuilder);
-        return hostBuilder.ConfigureServices(ConfigureTelemetryServices).ConfigureLogging(ConfigureApplicationInsights);
+        return hostBuilder.InternalConfigureApplicationInsights();
     }
+
+    internal static IHostBuilder InternalConfigureApplicationInsights(this IHostBuilder hostBuilder)
+        =>
+        hostBuilder.ConfigureServices(ConfigureTelemetryServices).ConfigureLogging(ConfigureApplicationInsights);
 
     private static void ConfigureApplicationInsights(HostBuilderContext context, ILoggingBuilder builder)
     {
