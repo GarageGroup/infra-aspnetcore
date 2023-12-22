@@ -12,8 +12,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GarageGroup.Infra.AspNetCore.ApplicationInsights" Version="3.1.0" />
     <PackageReference Include="GarageGroup.Infra.AspNetCore.EndpointApplication" Version="3.1.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
   </ItemGroup>
 
 </Project>

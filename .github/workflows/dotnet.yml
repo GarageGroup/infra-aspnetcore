@@ -33,17 +33,6 @@ jobs:
         -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
         --store-password-in-clear-text
 
-    # AspNetCore.ApplicationInsights
-
-    - name: Restore AspNetCore.ApplicationInsights
-      run: dotnet restore ./src/*/AspNetCore.ApplicationInsights.csproj
-
-    - name: Build AspNetCore.ApplicationInsights
-      run: dotnet build ./src/*/AspNetCore.ApplicationInsights.csproj --no-restore  -c Release
-
-    - name: Pack AspNetCore.ApplicationInsights
-      run: dotnet pack ./src/*/AspNetCore.ApplicationInsights.csproj --no-restore -o ~/nuget  -c Release
-
     # AspNetCore.EndpointApplication
 
     - name: Restore AspNetCore.EndpointApplication
