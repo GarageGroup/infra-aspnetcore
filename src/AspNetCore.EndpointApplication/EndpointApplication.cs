@@ -83,11 +83,11 @@ public sealed class EndpointApplication : IHost, IDisposable, IApplicationBuilde
 
     IServiceProvider IEndpointRouteBuilder.ServiceProvider
         =>
-        throw new NotImplementedException();
+        ((IEndpointRouteBuilder)webApplication).ServiceProvider;
 
     ICollection<EndpointDataSource> IEndpointRouteBuilder.DataSources
         =>
-        throw new NotImplementedException();
+        ((IEndpointRouteBuilder)webApplication).DataSources;
 
     public void Run(string? url = null)
         =>
