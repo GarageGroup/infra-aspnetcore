@@ -55,16 +55,16 @@ jobs:
     - name: Pack AspNetCore.AzureApplication
       run: dotnet pack ./src/*/AspNetCore.AzureApplication.csproj --no-restore -o ~/nuget  -c Release
 
-    # AspNetCore.Cors
+    # AspNetCore.Middleware
 
-    - name: Restore AspNetCore.Cors
-      run: dotnet restore ./src/*/AspNetCore.Cors.csproj
+    - name: Restore AspNetCore.Middleware
+      run: dotnet restore ./src/*/AspNetCore.Middleware.csproj
 
-    - name: Build AspNetCore.Cors
-      run: dotnet build ./src/*/AspNetCore.Cors.csproj --no-restore  -c Release
+    - name: Build AspNetCore.Middleware
+      run: dotnet build ./src/*/AspNetCore.Middleware.csproj --no-restore  -c Release
 
-    - name: Pack AspNetCore.Cors
-      run: dotnet pack ./src/*/AspNetCore.Cors.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack AspNetCore.Middleware
+      run: dotnet pack ./src/*/AspNetCore.Middleware.csproj --no-restore -o ~/nuget  -c Release
 
     # Push
 
