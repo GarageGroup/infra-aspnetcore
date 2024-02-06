@@ -73,12 +73,18 @@ public static class CorsMiddleware
     }
 
     private static CorsOption GetCorsOption(this IConfigurationSection? section)
-        =>
-        new(
-            allowOrigin: section?.GetValue<string>("AllowOrigin"),
-            allowCredentials: section?.GetValue<bool?>("AllowCredentials") ?? true,
-            allowHeaders: section?.GetValue<string>("AllowHeaders"),
-            allowMethods: section?.GetValue<string>("AllowMethods"),
-            maxAgeInMilliseconds: section?.GetValue<int?>("MaxAgeInMilliseconds"),
-            exposeHeaders: section?.GetValue<string>("ExposeHeaders"));
+    {
+        if (section is null)
+        {
+            return new();
+        }
+
+        return new(
+            allowOrigin: section["AllowOrigin"],
+            allowCredentials: section.GetValue<bool?>("AllowCredentials") ?? true,
+            allowHeaders: section["AllowHeaders"],
+            allowMethods: section["AllowMethods"],
+            maxAgeInMilliseconds: section.GetValue<int?>("MaxAgeInMilliseconds"),
+            exposeHeaders: section["ExposeHeaders"]);
+    }
 }

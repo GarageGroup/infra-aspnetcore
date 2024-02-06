@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.AzureApplication", "AspNetCore.AzureApplication\AspNetCore.AzureApplication.csproj", "{C8D312E8-9965-4F6D-87B0-9E4E1F64F341}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Cors", "AspNetCore.Cors\AspNetCore.Cors.csproj", "{538BFAD7-3BE4-4DE6-A89C-B4155F42866E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Middleware", "AspNetCore.Middleware\AspNetCore.Middleware.csproj", "{538BFAD7-3BE4-4DE6-A89C-B4155F42866E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.EndpointApplication", "AspNetCore.EndpointApplication\AspNetCore.EndpointApplication.csproj", "{5FC51A44-EFDE-414E-992A-8CC10398F3B4}"
 EndProject
