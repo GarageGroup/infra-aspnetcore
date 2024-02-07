@@ -98,7 +98,7 @@ public static class ApiKeyAuthenticationMiddleware
         var paths = pathMatch.HasValue switch
         {
             false => openApiDocument.Paths.SelectMany(GetOperations).ToArray(),
-            _ => openApiDocument.Paths.Where(IsPathMathed).SelectMany(GetOperations).ToArray()
+            _ => openApiDocument.Paths.Where(IsPathMatched).SelectMany(GetOperations).ToArray()
         };
 
         if (paths.Length is 0)
@@ -170,7 +170,7 @@ public static class ApiKeyAuthenticationMiddleware
             };
         }
 
-        bool IsPathMathed(KeyValuePair<string, OpenApiPathItem> item)
+        bool IsPathMatched(KeyValuePair<string, OpenApiPathItem> item)
             =>
             item.Key.StartsWith(pathMatch, StringComparison.InvariantCultureIgnoreCase);
 
