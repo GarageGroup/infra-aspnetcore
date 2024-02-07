@@ -33,7 +33,7 @@ public static class ApiKeyAuthenticationMiddleware
     private const string SecuritySchemeKey = "apiKeyAuthentication";
 
     public static TApplicationBuilder UseApiKeyAuthentication<TApplicationBuilder>(
-        this TApplicationBuilder applicationBuilder, string sectionName = "ApiKey")
+        this TApplicationBuilder applicationBuilder, string sectionName = "ApiKey", PathString path = default)
         where TApplicationBuilder : class, IApplicationBuilder
     {
         ArgumentNullException.ThrowIfNull(applicationBuilder);
@@ -49,21 +49,21 @@ public static class ApiKeyAuthenticationMiddleware
             IsDisabled = section.GetValue<bool>("IsDisabled")
         };
 
-        return applicationBuilder.InnerUseApiKeyAuthentication(option);
+        return applicationBuilder.InnerUseApiKeyAuthentication(option, path);
     }
 
     public static TApplicationBuilder UseApiKeyAuthentication<TApplicationBuilder>(
-        this TApplicationBuilder applicationBuilder, ApiKeyAuthenticationOption option)
+        this TApplicationBuilder applicationBuilder, ApiKeyAuthenticationOption option, PathString path = default)
         where TApplicationBuilder : class, IApplicationBuilder
     {
         ArgumentNullException.ThrowIfNull(applicationBuilder);
         ArgumentNullException.ThrowIfNull(option);
 
-        return applicationBuilder.InnerUseApiKeyAuthentication(option);
+        return applicationBuilder.InnerUseApiKeyAuthentication(option, path);
     }
 
     private static TApplicationBuilder InnerUseApiKeyAuthentication<TApplicationBuilder>(
-        this TApplicationBuilder applicationBuilder, ApiKeyAuthenticationOption option)
+        this TApplicationBuilder applicationBuilder, ApiKeyAuthenticationOption option, PathString pathMatch)
         where TApplicationBuilder : class, IApplicationBuilder
     {
         if (option.IsDisabled)
@@ -81,16 +81,27 @@ public static class ApiKeyAuthenticationMiddleware
 
         void InnerConfigureSwagger([AllowNull] OpenApiDocument openApiDocument)
             =>
-            ConfigureSwagger(openApiDocument, option);
+            ConfigureSwagger(openApiDocument, option, pathMatch);
 
         Task InnerInvokeAsync(HttpContext context, Func<Task> nextAsync)
             =>
-            context.VerifyApiKeyAsync(nextAsync, option);
+            context.VerifyApiKeyAsync(nextAsync, option, pathMatch);
     }
 
-    private static void ConfigureSwagger([AllowNull] OpenApiDocument openApiDocument, ApiKeyAuthenticationOption option)
+    private static void ConfigureSwagger([AllowNull] OpenApiDocument openApiDocument, ApiKeyAuthenticationOption option, PathString pathMatch)
     {
         if (openApiDocument?.Paths?.Count is not > 0)
+        {
+            return;
+        }
+
+        var paths = pathMatch.HasValue switch
+        {
+            false => openApiDocument.Paths.SelectMany(GetOperations).ToArray(),
+            _ => openApiDocument.Paths.Where(IsPathMathed).SelectMany(GetOperations).ToArray()
+        };
+
+        if (paths.Length is 0)
         {
             return;
         }
@@ -126,7 +137,7 @@ public static class ApiKeyAuthenticationMiddleware
             openApiDocument.Components.Schemas[ProblemSchemaId] = CreateProblemSchema();
         }
 
-        foreach (var path in openApiDocument.Paths.Values.SelectMany(GetOperations))
+        foreach (var path in paths)
         {
             path.Security ??= [];
             path.Security.Add(securityRequirement);
@@ -159,17 +170,26 @@ public static class ApiKeyAuthenticationMiddleware
             };
         }
 
-        static IEnumerable<OpenApiOperation> GetOperations(OpenApiPathItem pathItem)
+        bool IsPathMathed(KeyValuePair<string, OpenApiPathItem> item)
             =>
-            pathItem.Operations?.Select(GetValue) ?? Enumerable.Empty<OpenApiOperation>();
+            item.Key.StartsWith(pathMatch, StringComparison.InvariantCultureIgnoreCase);
+
+        static IEnumerable<OpenApiOperation> GetOperations(KeyValuePair<string, OpenApiPathItem> item)
+            =>
+            item.Value.Operations?.Select(GetValue) ?? [];
 
         static TValue GetValue<TKey, TValue>(KeyValuePair<TKey, TValue> pair)
             =>
             pair.Value;
     }
 
-    private static Task VerifyApiKeyAsync(this HttpContext context, Func<Task> nextAsync, ApiKeyAuthenticationOption option)
+    private static Task VerifyApiKeyAsync(this HttpContext context, Func<Task> nextAsync, ApiKeyAuthenticationOption option, PathString pathMatch)
     {
+        if (pathMatch.HasValue && context.Request.Path.StartsWithSegments(pathMatch, out _, out _) is false)
+        {
+            return nextAsync.Invoke();
+        }
+
         var apiKey = context.GetApiKey(option);
         if (apiKey.IsApiKeyValid(option))
         {
