@@ -35,12 +35,12 @@ public sealed class EndpointApplication : IHost, IDisposable, IApplicationBuilde
 
     private readonly WebApplication webApplication;
 
-    private readonly ISwaggerBuilder swaggerBuilder;
+    private readonly SwaggerBuilder swaggerBuilder;
 
     private EndpointApplication(WebApplication webApplication)
     {
         this.webApplication = webApplication;
-        swaggerBuilder = new SwaggerBuilder();
+        swaggerBuilder = new();
     }
 
     public IServiceProvider Services
@@ -115,7 +115,7 @@ public sealed class EndpointApplication : IHost, IDisposable, IApplicationBuilde
 
     IApplicationBuilder IApplicationBuilder.Use(Func<RequestDelegate, RequestDelegate> middleware)
         =>
-        ((IApplicationBuilder)webApplication).Use(middleware);
+        webApplication.Use(middleware);
 
     IApplicationBuilder IApplicationBuilder.New()
         =>
