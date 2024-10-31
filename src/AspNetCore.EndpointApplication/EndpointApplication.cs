@@ -25,7 +25,7 @@ public sealed class EndpointApplication : IHost, IDisposable, IApplicationBuilde
 
     internal static EndpointApplication InternalFromWebApplicationBuilder(WebApplicationBuilder webApplicationBuilder)
     {
-        webApplicationBuilder.Services.AddSocketsHttpHandlerProviderAsSingleton().AddTokenCredentialStandardAsSingleton();
+        webApplicationBuilder.Services.AddSocketsHttpHandlerProviderAsSingleton();
 
         var webApplication = webApplicationBuilder.Build();
         webApplication.UseRouting();

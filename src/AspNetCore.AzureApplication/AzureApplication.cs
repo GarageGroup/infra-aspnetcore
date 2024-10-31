@@ -17,9 +17,12 @@ public static class AzureApplication
     {
         var appBuilder = WebApplication.CreateBuilder(args);
 
-        appBuilder.Host.InternalConfigureApplicationInsights().InternalConfigureAzureAppConfiguration();
-        configure?.Invoke(appBuilder);
+        appBuilder.Host
+            .InternalConfigureApplicationInsights()
+            .InternalConfigureRefreshableTokenCredentialStandard()
+            .InternalConfigureAzureAppConfiguration();
 
+        configure?.Invoke(appBuilder);
         return appBuilder.BuildEndpointApplication();
     }
 }
