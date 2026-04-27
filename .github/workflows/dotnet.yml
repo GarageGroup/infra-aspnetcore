@@ -9,69 +9,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repositiry
-      uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v6
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: '9.0.x'
-
-     # Add NuGet Sources
+        dotnet-version: 10.0.x
 
     - name: Create Local NuGet Directory
       run: mkdir ~/nuget
 
-    - name: Add Local Nuget Source
-      run: dotnet nuget add source ~/nuget
+    - name: Restore slnx
+      run: dotnet restore
 
-    - name: Add GarageGroup NuGet Source
-      run: >
-        dotnet nuget add source ${{ vars.GG_NUGET_SOURCE_URL }}
-        -n garage
-        -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
-        -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
-        --store-password-in-clear-text
+    - name: Build slnx
+      run: dotnet build --no-restore -c Release
 
-    # AspNetCore.EndpointApplication
+    - name: Test slnx
+      run: dotnet test --no-restore -c Release
 
-    - name: Restore AspNetCore.EndpointApplication
-      run: dotnet restore ./src/*/AspNetCore.EndpointApplication.csproj
-
-    - name: Build AspNetCore.EndpointApplication
-      run: dotnet build ./src/*/AspNetCore.EndpointApplication.csproj --no-restore  -c Release
-
-    - name: Pack AspNetCore.EndpointApplication
-      run: dotnet pack ./src/*/AspNetCore.EndpointApplication.csproj --no-restore -o ~/nuget  -c Release
-
-    # AspNetCore.AzureApplication
-
-    - name: Restore AspNetCore.AzureApplication
-      run: dotnet restore ./src/*/AspNetCore.AzureApplication.csproj
-
-    - name: Build AspNetCore.AzureApplication
-      run: dotnet build ./src/*/AspNetCore.AzureApplication.csproj --no-restore  -c Release
-
-    - name: Pack AspNetCore.AzureApplication
-      run: dotnet pack ./src/*/AspNetCore.AzureApplication.csproj --no-restore -o ~/nuget  -c Release
-
-    # AspNetCore.Middleware
-
-    - name: Restore AspNetCore.Middleware
-      run: dotnet restore ./src/*/AspNetCore.Middleware.csproj
-
-    - name: Build AspNetCore.Middleware
-      run: dotnet build ./src/*/AspNetCore.Middleware.csproj --no-restore  -c Release
-
-    - name: Pack AspNetCore.Middleware
-      run: dotnet pack ./src/*/AspNetCore.Middleware.csproj --no-restore -o ~/nuget  -c Release
-
-    # Push
+    - name: Pack slnx
+      run: dotnet pack --no-build -o ~/nuget -c Release
 
     - name: Push Packages
       if: ${{ github.ref == 'refs/heads/main' }}
       run: >
-        dotnet nuget push "../../../nuget/*.nupkg"
-        -s ${{ secrets.GG_NUGET_SOURCE_URL }}
-        -k ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
+        dotnet nuget push ~/nuget/*.nupkg
+        -s https://api.nuget.org/v3/index.json
+        -k ${{ secrets.NUGET_SECRET }}
         --skip-duplicate

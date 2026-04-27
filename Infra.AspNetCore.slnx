@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/.github/">
+    <File Path=".github/workflows/dotnet.yml" />
+  </Folder>
+  <Project Path="src/AspNetCore.AzureApplication/AspNetCore.AzureApplication.csproj" />
+  <Project Path="src/AspNetCore.EndpointApplication/AspNetCore.EndpointApplication.csproj" />
+  <Project Path="src/AspNetCore.Middleware/AspNetCore.Middleware.csproj" />
+</Solution>

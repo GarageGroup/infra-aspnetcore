@@ -23,7 +23,7 @@ internal sealed partial class RefreshableTokenCredentialBackgroundService : Back
 
     private static readonly TimeSpan CancellationTimeout
         =
-        TimeSpan.FromMinutes(10);
+        TimeSpan.FromMinutes(40);
 
     private readonly ITokensRefreshSupplier? tokenCredential;
 

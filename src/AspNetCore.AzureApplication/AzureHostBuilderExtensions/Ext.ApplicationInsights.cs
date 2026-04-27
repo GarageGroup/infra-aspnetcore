@@ -1,6 +1,6 @@
 ﻿using System;
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.Hosting;
 
@@ -13,31 +13,27 @@ partial class AzureHostBuilderExtensions
     }
 
     internal static IHostBuilder InternalConfigureApplicationInsights(this IHostBuilder hostBuilder)
-        =>
-        hostBuilder.ConfigureServices(ConfigureTelemetryServices).ConfigureLogging(ConfigureApplicationInsights);
-
-    private static void ConfigureApplicationInsights(HostBuilderContext context, ILoggingBuilder builder)
     {
-        if (context.HasApplicationInsightsConnectionString() is false)
-        {
-            return;
-        }
+        return hostBuilder.ConfigureServices(ConfigureTelemetryServices);
 
-        builder.AddApplicationInsights();
+        static void ConfigureTelemetryServices(HostBuilderContext context, IServiceCollection services)
+        {
+            var connectionString = context.GetApplicationInsightsConnectionString();
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                return;
+            }
+
+            services.AddApplicationInsightsTelemetry(InnerConfigure);
+
+            void InnerConfigure(ApplicationInsightsServiceOptions options)
+                =>
+                options.ConnectionString = connectionString;
+        }
     }
 
-    private static void ConfigureTelemetryServices(HostBuilderContext context, IServiceCollection services)
-    {
-        if (context.HasApplicationInsightsConnectionString() is false)
-        {
-            return;
-        }
-
-        services.AddApplicationInsightsTelemetry();
-    }
-
-    private static bool HasApplicationInsightsConnectionString(this HostBuilderContext context)
+    private static string? GetApplicationInsightsConnectionString(
+        this HostBuilderContext context)
         =>
-        string.IsNullOrEmpty(context.Configuration["ApplicationInsights:ConnectionString"]) is false ||
-        string.IsNullOrEmpty(context.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]) is false;
+        context.Configuration["ApplicationInsights:ConnectionString"] ?? context.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
 }

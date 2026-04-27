@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 
 namespace Microsoft.AspNetCore.Builder;
 
@@ -107,10 +107,10 @@ public static class ApiKeyAuthenticationMiddleware
         }
 
         openApiDocument.Components ??= new();
-        openApiDocument.Components.Schemas ??= new Dictionary<string, OpenApiSchema>();
+        openApiDocument.Components.Schemas ??= new Dictionary<string, IOpenApiSchema>();
 
-        openApiDocument.Components.SecuritySchemes ??= new Dictionary<string, OpenApiSecurityScheme>();
-        openApiDocument.Components.SecuritySchemes[SecuritySchemeKey] = new()
+        openApiDocument.Components.SecuritySchemes ??= new Dictionary<string, IOpenApiSecurityScheme>();
+        openApiDocument.Components.SecuritySchemes[SecuritySchemeKey] = new OpenApiSecurityScheme
         {
             Name = option.HeaderName,
             Type = SecuritySchemeType.ApiKey,
@@ -118,18 +118,13 @@ public static class ApiKeyAuthenticationMiddleware
             Description = "API key authentication header"
         };
 
-        var referenceScurityScheme = new OpenApiSecurityScheme
-        {
-            Reference = new()
-            {
-                Type = ReferenceType.SecurityScheme,
-                Id = SecuritySchemeKey
-            }
-        };
+        var referenceSecurityScheme = new OpenApiSecuritySchemeReference(
+            referenceId: SecuritySchemeKey,
+            hostDocument: openApiDocument);
 
         var securityRequirement = new OpenApiSecurityRequirement
         {
-            [referenceScurityScheme] = []
+            [referenceSecurityScheme] = []
         };
 
         if (openApiDocument.Components.Schemas.ContainsKey(ProblemSchemaId) is false)
@@ -149,32 +144,26 @@ public static class ApiKeyAuthenticationMiddleware
                 continue;
             }
 
-            path.Responses[FailureStatusCode.ToString()] = new()
+            path.Responses[FailureStatusCode.ToString()] = new OpenApiResponse
             {
                 Description = FailureDescription,
-                Content = new Dictionary<string, OpenApiMediaType>
+                Content = new Dictionary<string, IOpenApiMediaType>
                 {
-                    [MediaTypeNames.Application.Json] = new()
+                    [MediaTypeNames.Application.Json] = new OpenApiMediaType
                     {
-                        Schema = new()
-                        {
-                            Nullable = false,
-                            Reference = new()
-                            {
-                                Type = ReferenceType.Schema,
-                                Id = ProblemSchemaId
-                            }
-                        }
+                        Schema = new OpenApiSchemaReference(
+                            referenceId: ProblemSchemaId,
+                            hostDocument: openApiDocument)
                     }
                 }
             };
         }
 
-        bool IsPathMatched(KeyValuePair<string, OpenApiPathItem> item)
+        bool IsPathMatched(KeyValuePair<string, IOpenApiPathItem> item)
             =>
             item.Key.StartsWith(pathMatch, StringComparison.InvariantCultureIgnoreCase);
 
-        static IEnumerable<OpenApiOperation> GetOperations(KeyValuePair<string, OpenApiPathItem> item)
+        static IEnumerable<OpenApiOperation> GetOperations(KeyValuePair<string, IOpenApiPathItem> item)
             =>
             item.Value.Operations?.Select(GetValue) ?? [];
 
@@ -261,8 +250,8 @@ public static class ApiKeyAuthenticationMiddleware
         =>
         new()
         {
-            Type = "object",
-            Properties = new Dictionary<string, OpenApiSchema>
+            Type = JsonSchemaType.Object,
+            Properties = new Dictionary<string, IOpenApiSchema>
             {
                 ["type"] = CreateStringSchema(),
                 ["title"] = CreateStringSchema(),
@@ -276,16 +265,14 @@ public static class ApiKeyAuthenticationMiddleware
         =>
         new()
         {
-            Type = "string",
-            Nullable = true
+            Type = JsonSchemaType.String
         };
 
     private static OpenApiSchema CreateInt32Schema()
         =>
         new()
         {
-            Type = "integer",
-            Format = "int32",
-            Nullable = true
+            Type = JsonSchemaType.Integer,
+            Format = "int32"
         };
 }
