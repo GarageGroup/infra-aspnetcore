@@ -1,5 +1,6 @@
 using System;
 using Azure.Core;
+using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -14,6 +15,7 @@ internal sealed partial class RefreshableTokenCredentialBackgroundService : Back
 
         return new(
             tokenCredential: serviceProvider.GetService<TokenCredential>(),
+            telemetryClient: serviceProvider.GetService<TelemetryClient>(),
             logger: serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger<RefreshableTokenCredentialBackgroundService>());
     }
 
@@ -27,12 +29,15 @@ internal sealed partial class RefreshableTokenCredentialBackgroundService : Back
 
     private readonly ITokensRefreshSupplier? tokenCredential;
 
+    private readonly TelemetryClient? telemetryClient;
+
     private readonly ILogger logger;
 
     private RefreshableTokenCredentialBackgroundService(
-        TokenCredential? tokenCredential, ILogger<RefreshableTokenCredentialBackgroundService> logger)
+        TokenCredential? tokenCredential, TelemetryClient? telemetryClient, ILogger<RefreshableTokenCredentialBackgroundService> logger)
     {
         this.tokenCredential = tokenCredential as ITokensRefreshSupplier;
+        this.telemetryClient = telemetryClient;
         this.logger = logger;
     }
 }
